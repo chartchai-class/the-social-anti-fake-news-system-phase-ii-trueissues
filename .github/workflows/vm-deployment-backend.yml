@@ -51,7 +51,7 @@ jobs:
           username: ${{ secrets.HOST_USER_NAME }}
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
-          source: "Backend/docker-compose-prod.yml"
+          source: "Backend/docker-compose.yml"
           target: "/home/ubuntu/backend"
           overwrite: true
 
