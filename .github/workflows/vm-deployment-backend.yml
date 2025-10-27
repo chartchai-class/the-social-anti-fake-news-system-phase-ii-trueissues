@@ -65,7 +65,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/latcharit/backend
+            cd /home/latcharit        # 👈 แก้จาก /home/latcharit/backend เป็น /home/latcharit
             mv docker-compose-prod.yml docker-compose.yml
             echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
             docker compose down
