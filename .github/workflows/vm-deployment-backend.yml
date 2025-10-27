@@ -47,13 +47,14 @@ jobs:
       - name: Copy file via SSH
         uses: appleboy/scp-action@v1
         with:
-          host: ${{ secrets.HOST_SERVER }}
-          username: ${{ secrets.HOST_USER_NAME }}
-          key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
-          port: 22
-          source: "Backend/docker-compose.yml"
-          target: "/home/latcharit/backend"
-          overwrite: true
+        host: ${{ secrets.HOST_SERVER }}
+        username: ${{ secrets.HOST_USER_NAME }}
+        key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
+        port: 22
+        source: "Backend/docker-compose-prod.yml"
+        target: "/home/latcharit/backend"
+        overwrite: true
+
 
       - name: Deploy with Docker Compose
         uses: appleboy/ssh-action@v1
