@@ -1,7 +1,6 @@
-// src/services/CommentService.ts
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 export async function fetchCommentsByNews(newsId: number) {
   const res = await axios.get(`${API_URL}/news/${newsId}/comments`);
