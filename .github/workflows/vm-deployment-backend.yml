@@ -52,10 +52,8 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           source: "Backend/docker-compose-prod.yml"
-          target: "/home/latcharit/"
+          target: "/home/latcharit/backend/"
           overwrite: true
-
-
 
       - name: Deploy with Docker Compose
         uses: appleboy/ssh-action@v1
@@ -65,10 +63,23 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/latcharit        # 👈 แก้จาก /home/latcharit/backend เป็น /home/latcharit
-            mv docker-compose-prod.yml docker-compose.yml
+            cd /home/latcharit/backend
+            echo "📁 Current directory:"
+            pwd
+            echo "📄 Files:"
+            ls -la
+            # ตรวจสอบว่ามีไฟล์ docker-compose-prod.yml อยู่ไหม
+            if [ -f "docker-compose-prod.yml" ]; then
+              mv docker-compose-prod.yml docker-compose.yml
+            elif [ -f "Backend/docker-compose-prod.yml" ]; then
+              mv Backend/docker-compose-prod.yml docker-compose.yml
+            else
+              echo "❌ ERROR: docker-compose-prod.yml not found!"
+              ls -R
+              exit 1
+            fi
+
             echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-            docker compose down
+            docker compose down || true
             docker compose pull
             docker compose up -d
-            # rm -rf /home/latcharit/backend
