@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           source: "Backend/docker-compose.yml"
-          target: "/home/ubuntu/backend"
+          target: "/home/latcharit/backend"
           overwrite: true
 
       - name: Deploy with Docker Compose
@@ -63,10 +63,10 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/ubuntu/backend
+            cd /home/latcharit/backend
             mv docker-compose-prod.yml docker-compose.yml
             echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
             docker compose down
             docker compose pull
             docker compose up -d
-            # rm -rf /home/ubuntu/backend
+            # rm -rf /home/latcharit/backend
