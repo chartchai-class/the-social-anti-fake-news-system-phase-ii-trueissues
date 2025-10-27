@@ -22,6 +22,7 @@ jobs:
         run: |
           mvn clean install -DskipTests -B
           mkdir -p target/dependency && (cd target/dependency; unzip ../*.jar)
+        working-directory: ./Backend
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
