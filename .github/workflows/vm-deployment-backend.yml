@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           source: "Backend/docker-compose-prod.yml"
-          target: "/home/latcharit/backend"
+          target: "/home/latcharit/"
           overwrite: true
 
 
